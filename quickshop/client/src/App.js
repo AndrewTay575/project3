@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component} from 'react';
+import Hits from './components/items';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Hits hits={this.state.hits} /> 
+    )
+  }
+  state = {
+    Hits: []
+  }
+
+  componentDidMount() {
+    fetch("https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%2520cheese?fields=item_name%252Citem_id%252Cbrand_name%252Cnf_calories%252Cnf_total_fat", {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
+        "x-rapidapi-key": "95c1ce326amsha7d94f43d9d2f13p1bd6cajsn96439d6126af"
+      }
+    })
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({ Hits: data })
+    })
+    .catch(console.log)
+  }
+
 }
 
 export default App;
