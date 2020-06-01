@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
+=======
+import React, { Component} from 'react';
+>>>>>>> e1af39c2892c3f01dfc4c721cd1f152829fb3247
 import Hits from './components/Items';
 import './App.css';
 
