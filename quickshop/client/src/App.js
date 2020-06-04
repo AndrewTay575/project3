@@ -9,7 +9,7 @@ class App extends Component {
     )
   }
   state = {
-    Hits: []
+    hits: []
   }
 
   componentDidMount() {
@@ -22,7 +22,8 @@ class App extends Component {
     })
     .then(res => res.json())
     .then((data) => {
-      this.setState({ Hits: data })
+      console.log(data);
+      this.setState({ hits: data.hits })
     })
     .catch(console.log)
   }
