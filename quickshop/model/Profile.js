@@ -5,21 +5,17 @@ const ProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
          ref: 'user'
     },
-
+    jobtitle: {
+      type:String
+    },
     location: {
         type: String
       },
       social: {
-        youtube: {
-          type: String
-        },
         twitter: {
           type: String
         },
         facebook: {
-          type: String
-        },
-        linkedin: {
           type: String
         },
         instagram: {
