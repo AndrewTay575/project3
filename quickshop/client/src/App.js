@@ -1,33 +1,39 @@
-import React, { Component } from 'react';
-import Hits from './Components/Items';
+import React, { Fragment, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Landing from './components/layout/Landing';
+import Routes from './components/routing/Routes';
+
+// Redux
+import { Provider } from 'react-redux';
+import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <Hits hits={this.state.hits} /> 
-    )
-  }
-  state = {
-    hits: []
-  }
-
-  componentDidMount() {
-    fetch("https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%2520cheese?fields=item_name%252Citem_id%252Cbrand_name%252Cnf_calories%252Cnf_total_fat", {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
-        "x-rapidapi-key": "95c1ce326amsha7d94f43d9d2f13p1bd6cajsn96439d6126af"
-      }
-    })
-    .then(res => res.json())
-    .then((data) => {
-      console.log(data);
-      this.setState({ hits: data.hits })
-    })
-    .catch(console.log)
-  }
-
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
 }
+
+const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
+  return (
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Switch>
+            <Route exact path='/' component={Landing} />
+            <Route component={Routes} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
