@@ -10,12 +10,12 @@ const PostItem = ({
   post: { _id, text, name, avatar, user, likes, comments, date },
   showActions
 }) => (
-    <div class="post bg-white p-1 my-1">
+    <div class="post bg-dark p-1 my-1">
           <div>
             <a href="profile.html">
               <img
                 class="round-img"
-                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                src={avatar}
                 alt=""
               />
               <h4>John Doe</h4>
@@ -31,11 +31,11 @@ const PostItem = ({
              <p class="post-date">
                 Posted on 04/16/2019
             </p>
-            <button type="button" class="btn btn-light">
+            <button type="button" class="btn btn-primary">
               <i class="fas fa-thumbs-up"></i>
               <span>4</span>
             </button>
-            <button type="button" class="btn btn-light">
+            <button type="button" class="btn btn-primary">
               <i class="fas fa-thumbs-down"></i>
             </button>
             <a href="post.html" class="btn btn-primary">
